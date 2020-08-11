@@ -216,20 +216,16 @@ def training_loop(
             if 'lod' in G_gpu.vars: lod_assign_ops += [tf.assign(G_gpu.vars['lod'], lod_in)]
             if 'lod' in D_gpu.vars: lod_assign_ops += [tf.assign(D_gpu.vars['lod'], lod_in)]
             with tf.control_dependencies(lod_assign_ops):
-                with tf.name_scope('G_loss'):
-                    G_loss, G_reg = dnnlib.util.call_func_by_name(G=G_gpu, D=D_gpu, opt=G_opt, training_set=training_set, minibatch_size=minibatch_gpu_in, **G_loss_args)
-                with tf.name_scope('D_loss'):
-                    D_loss, D_reg = dnnlib.util.call_func_by_name(G=G_gpu, D=D_gpu, opt=D_opt, training_set=training_set, minibatch_size=minibatch_gpu_in, reals=reals_read, labels=labels_read, **D_loss_args)
+                with tf.name_scope('loss'):
+                    loss, reg = dnnlib.util.call_func_by_name(G=G_gpu,
+                                                              D=D_gpu, opt=D_opt,
+                                                              training_set=training_set,
+                                                              minibatch_size=minibatch_gpu_in,
+                                                              reals=reals_read, labels=labels_read, **D_loss_args)
 
             # Register gradients.
-            if not lazy_regularization:
-                if G_reg is not None: G_loss += G_reg
-                if D_reg is not None: D_loss += D_reg
-            else:
-                if G_reg is not None: G_reg_opt.register_gradients(tf.reduce_mean(G_reg * G_reg_interval), G_gpu.trainables)
-                if D_reg is not None: D_reg_opt.register_gradients(tf.reduce_mean(D_reg * D_reg_interval), D_gpu.trainables)
-            G_opt.register_gradients(tf.reduce_mean(G_loss), G_gpu.trainables)
-            D_opt.register_gradients(tf.reduce_mean(D_loss), D_gpu.trainables)
+            G_opt.register_gradients(tf.reduce_mean(loss), G_gpu.trainables)
+            D_opt.register_gradients(tf.reduce_mean(loss), D_gpu.trainables)
 
     # Setup training ops.
     data_fetch_op = tf.group(*data_fetch_ops)
@@ -286,27 +282,13 @@ def training_loop(
 
             # Fast path without gradient accumulation.
             if len(rounds) == 1:
-                tflib.run([G_train_op, data_fetch_op], feed_dict)
-                if run_G_reg:
-                    tflib.run(G_reg_op, feed_dict)
-                tflib.run([D_train_op, Gs_update_op], feed_dict)
-                if run_D_reg:
-                    tflib.run(D_reg_op, feed_dict)
+                tflib.run([G_train_op, data_fetch_op, D_train_op, Gs_update_op], feed_dict)
 
             # Slow path with gradient accumulation.
             else:
                 for _round in rounds:
-                    tflib.run(G_train_op, feed_dict)
-                if run_G_reg:
-                    for _round in rounds:
-                        tflib.run(G_reg_op, feed_dict)
+                    tflib.run([G_train_op, data_fetch_op, D_train_op], feed_dict)
                 tflib.run(Gs_update_op, feed_dict)
-                for _round in rounds:
-                    tflib.run(data_fetch_op, feed_dict)
-                    tflib.run(D_train_op, feed_dict)
-                if run_D_reg:
-                    for _round in rounds:
-                        tflib.run(D_reg_op, feed_dict)
 
         # Perform maintenance tasks once per tick.
         done = (cur_nimg >= total_kimg * 1000)

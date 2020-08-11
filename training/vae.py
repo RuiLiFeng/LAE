@@ -565,14 +565,31 @@ def D_stylegan2(
                 x = minibatch_stddev_layer(x, mbstd_group_size, mbstd_num_features)
         with tf.variable_scope('Conv'):
             x = apply_bias_act(conv2d_layer(x, fmaps=nf(1), kernel=3), act=act)
-        with tf.variable_scope('Dense0'):
-            x = apply_bias_act(dense_layer(x, fmaps=nf(0)), act=act)
+        with tf.variable_scope('mu'):
+            mu = apply_bias_act(dense_layer(x, fmaps=nf(0)), act=act)
+        with tf.variable_scope('log_sigma'):
+            log_sigma = apply_bias_act(dense_layer(x, fmaps=nf(0)), act=act)
 
-    x_out = x
+    x_out = reparametric(mu, log_sigma)
 
     # Output layer with label conditioning from "Which Training Methods for GANs do actually Converge?"
     assert x_out.dtype == tf.as_dtype(dtype)
     x_out = tf.identity(x_out, name='x_out')
-    return x_out
+    return x_out, mu, log_sigma
 
 #----------------------------------------------------------------------------
+
+
+def reparametric(mu, log_sigma, distribution='normal', name=None):
+    assert mu.shape == log_sigma.shape, 'The shape of mu and sigma must much, ' \
+                                           'found %s and %s' % (mu.shape, log_sigma.shape)
+    sigma = tf.exp(log_sigma * 0.5)
+    if distribution == 'normal':
+        epi = tf.random.normal(mu.shape, dtype=mu.dtype)
+    else:
+        raise ValueError('Not supported distribution type %s !' % distribution)
+    if name is not None:
+        z = tf.add(tf.multiply(epi, sigma), mu, name=name)
+    else:
+        z = tf.multiply(epi, sigma) + mu
+    return z
