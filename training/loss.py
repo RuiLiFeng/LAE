@@ -195,5 +195,21 @@ def G_logistic_ns_pathreg(G, D, opt, training_set, minibatch_size, pl_minibatch_
     return loss, reg
 
 #----------------------------------------------------------------------------
+# VAE loss
+def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatch_shrink=2,
+             pl_decay=0.01, pl_weight=2.0,
+             recon_loss='mse', rencon_loss_lambda=1.0, laplace_lambda=None):
+    _ = opt, training_set
+    x_out = D.get_output_for(reals, labels, is_training=True)
+    recon = G.get_output_for(x_out, labels, is_training=True)
+
+    with tf.variable_scope('KL_divergence'):
+
+
+    real_scores_out = autosummary('Loss/scores/real', real_scores_out)
+    fake_scores_out = autosummary('Loss/scores/fake', fake_scores_out)
+    loss = tf.nn.softplus(fake_scores_out)  # -log(1-sigmoid(fake_scores_out))
+    loss += tf.nn.softplus(
+        -real_scores_out)  # -log(sigmoid(real_scores_out)) # pylint: disable=invalid-unary-operand-type
 
 
