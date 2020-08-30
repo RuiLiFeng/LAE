@@ -593,3 +593,4 @@ def reparametric(mu, log_sigma, distribution='normal', name=None):
     else:
         z = tf.multiply(epi, sigma) + mu
     return z
+
