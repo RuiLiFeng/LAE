@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="" />
+    <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/training/vae_dcgan.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vae_dcgan.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2813">
-              <caret line="223" column="79" lean-forward="true" selection-start-line="223" selection-start-column="79" selection-end-line="223" selection-end-column="79" />
+            <state relative-caret-position="-819">
+              <caret line="181" column="56" selection-start-line="181" selection-start-column="56" selection-end-line="181" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -189,12 +191,12 @@
       <updated>1596611433252</updated>
       <workItem from="1596611457550" duration="4684000" />
       <workItem from="1597152015058" duration="1730000" />
-      <workItem from="1598771584868" duration="7058000" />
+      <workItem from="1598771584868" duration="7427000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13472000" />
+    <option name="totallyTimeSpent" value="13841000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -213,8 +215,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.2527115" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.5976139" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" visible="true" weight="0.3286334" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.5976139" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" weight="0.3286334" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -318,8 +320,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2813">
-          <caret line="223" column="79" lean-forward="true" selection-start-line="223" selection-start-column="79" selection-end-line="223" selection-end-column="79" />
+        <state relative-caret-position="-819">
+          <caret line="181" column="56" selection-start-line="181" selection-start-column="56" selection-end-line="181" selection-end-column="56" />
         </state>
       </provider>
     </entry>

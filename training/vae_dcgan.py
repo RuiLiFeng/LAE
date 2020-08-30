@@ -170,7 +170,7 @@ def Decoder(
 
     with tf.variable_scope('Dense'):
         z = dense_layer(dlatents_in, num_units * height * width)
-        z = tf.reshape(z, [-1, height, width, num_units])
+        z = tf.reshape(z, [-1, num_units, height, width])
         z = apply_bias_act(z, act)
 
     for layer_id in range(num_layers - 1):
