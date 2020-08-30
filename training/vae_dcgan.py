@@ -177,9 +177,9 @@ def Decoder(
         with tf.variable_scope('conv%d' % layer_id):
             scale = 2 ** (num_layers + 1)
             z = conv2d_layer(z, num_units // scale, kernel=3, up=True, resample_kernel=resample_kernel)
-            z = apply_bias_act(z)
+            z = apply_bias_act(z, bias_var='conv_bias')
             z = tf.layers.batch_normalization(z, training=is_training)
-            z = apply_bias_act(z, act)
+            z = apply_bias_act(z, act, bias_var='bn_bias')
 
     with tf.variable_scope('toRGB'):
         z = conv2d_layer(z, fmaps=num_channels, kernel=1)
