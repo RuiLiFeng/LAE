@@ -225,11 +225,9 @@ def Encoder(
 
 
 def reparametric(mu, log_sigma, distribution='normal', name=None):
-    assert mu.shape == log_sigma.shape, 'The shape of mu and sigma must much, ' \
-                                           'found %s and %s' % (mu.shape, log_sigma.shape)
     sigma = tf.exp(log_sigma * 0.5)
     if distribution == 'normal':
-        epi = tf.random.normal(mu.shape, dtype=mu.dtype)
+        epi = tf.random.normal(tf.shape(mu), dtype=mu.dtype)
     else:
         raise ValueError('Not supported distribution type %s !' % distribution)
     if name is not None:
