@@ -209,7 +209,7 @@ def Encoder(
             scale = 2 ** (num_layers - layer_id - 1)
             x = conv2d_layer(images_in, num_units // scale, 3, down=True, resample_kernel=resample_kernel)
             x = tf.layers.batch_normalization(x, training=is_training)
-            x = apply_bias_act(x, act, bias_var='actbias' % layer_id)
+            x = apply_bias_act(x, act)
 
     x = tf.reshape(x, [-1, np.prod(x.shape[1:])])
 
