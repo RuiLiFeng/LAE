@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/training/vae_dcgan.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vae_dcgan.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,10 +35,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/training/dataset.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/training/loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7596">
-              <caret line="214" column="21" selection-start-line="214" selection-start-column="21" selection-end-line="214" selection-end-column="21" />
+            <state relative-caret-position="540">
+              <caret line="212" column="44" lean-forward="true" selection-start-line="212" selection-start-column="44" selection-end-line="212" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -73,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="185" column="43" lean-forward="true" selection-start-line="185" selection-start-column="43" selection-end-line="185" selection-end-column="43" />
+            <state relative-caret-position="-1022">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
             </state>
           </provider>
         </entry>
@@ -192,17 +200,18 @@
       <updated>1596611433252</updated>
       <workItem from="1596611457550" duration="4684000" />
       <workItem from="1597152015058" duration="1730000" />
-      <workItem from="1598771584868" duration="7672000" />
+      <workItem from="1598771584868" duration="8737000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14086000" />
+    <option name="totallyTimeSpent" value="15151000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14552239" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14552239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -216,7 +225,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.2527115" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.20390455" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.20390455" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" weight="0.3286334" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -234,20 +243,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/training/dcgan.py" />
     <entry file="file://$PROJECT_DIR$/training/dcgan_loop.py" />
-    <entry file="file://$PROJECT_DIR$/training/dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/loss.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7596">
-          <caret line="214" column="21" selection-start-line="214" selection-start-column="21" selection-end-line="214" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/training/misc.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -321,8 +316,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="185" column="43" lean-forward="true" selection-start-line="185" selection-start-column="43" selection-end-line="185" selection-end-column="43" />
+        <state relative-caret-position="-1022">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/loss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="212" column="44" lean-forward="true" selection-start-line="212" selection-start-column="44" selection-end-line="212" selection-end-column="44" />
         </state>
       </provider>
     </entry>
