@@ -148,10 +148,56 @@ def minibatch_stddev_layer(x, group_size=4, num_new_features=1):
 # Composed of two sub-networks (mapping and synthesis) that are defined below.
 # Used in configs B-F (Table 1).
 
-def Decoder(
+def Decoder_main(
+    latents_in,                                         # First input: Latent vectors (Z) [minibatch, latent_size].
+    labels_in,                                          # Second input: Conditioning labels [minibatch, label_size].
+    is_training             = False,                    # Network is under training? Enables and disables specific features.
+    return_dlatents         = False,                    # Return dlatents in addition to the images?
+    is_template_graph       = False,                    # True = template graph constructed by the Network class, False = actual evaluation.
+    components              = dnnlib.EasyDict(),        # Container for sub-networks. Retained between calls.
+    mapping_func            = 'Decoder_mapping',              # Build func name for the mapping network.
+    synthesis_func          = 'Decoder_synthesis',  # Build func name for the synthesis network.
+    **kwargs
+):
+    # Setup components.
+    if 'synthesis' not in components:
+        components.synthesis = tflib.Network('G_synthesis', func_name=globals()[synthesis_func], **kwargs)
+    if 'mapping' not in components:
+        components.mapping = tflib.Network('G_mapping', func_name=globals()[mapping_func], **kwargs)
+
+    # Evaluate mapping network.
+    dlatents = components.mapping.get_output_for(latents_in, labels_in, is_training=is_training, **kwargs)
+    dlatents = tf.cast(dlatents, tf.float32)
+
+    images_out = components.synthesis.get_output_for(dlatents, is_training=is_training,
+                                                     force_clean_graph=is_template_graph, **kwargs)
+
+    # Return requested outputs.
+    images_out = tf.identity(images_out, name='images_out')
+    if return_dlatents:
+        return images_out, dlatents
+    return images_out
+
+
+def Decoder_mapping(
         dlatents_in,
         labels_in,
-        label_size      = 0,
+        label_size           = 0,
+        dlatent_size         = 512,
+        dtype                = 'float32',
+        act='lrelu',
+        **kwargs
+):
+    dlatents_in.set_shape([None, dlatent_size])
+    labels_in.set_shape([None, label_size])
+    latents_in = tf.cast(dlatents_in, dtype)
+    labels_in = tf.cast(labels_in, dtype)
+
+    return tf.identity(dlatents_in, name='dlatents_in')
+
+
+def Decoder_synthesis(
+        dlatents_in,
         dlatent_size    = 512,
         num_channels    = 3,
         resolution      = 128,
@@ -165,9 +211,6 @@ def Decoder(
     # Primary inputs.
     dlatents_in.set_shape([None, dlatent_size])
     dlatents_in = tf.cast(dlatents_in, dtype)
-
-    labels_in.set_shape([None, label_size])
-    labels_in = tf.cast(labels_in, dtype)
 
     resolution_log2 = int(np.log2(resolution))
     assert resolution == 2 ** resolution_log2 and resolution >= 4
