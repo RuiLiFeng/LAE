@@ -150,6 +150,8 @@ def minibatch_stddev_layer(x, group_size=4, num_new_features=1):
 
 def Decoder(
         dlatents_in,
+        labels_in,
+        label_size      = 0,
         dlatent_size    = 512,
         num_channels    = 3,
         resolution      = 128,
@@ -164,6 +166,9 @@ def Decoder(
     # Primary inputs.
     dlatents_in.set_shape([None, dlatent_size])
     dlatents_in = tf.cast(dlatents_in, dtype)
+
+    labels_in.set_shape([None, label_size])
+    labels_in = tf.cast(labels_in, dtype)
 
     height = resolution // 2**(num_layers - 1)
     width = resolution // 2 ** (num_layers - 1)
@@ -190,6 +195,8 @@ def Decoder(
 
 def Encoder(
         images_in,
+        labels_in,
+        label_size       = 0,
         dlatent_size     = 512,
         num_channels     = 3,
         resolution       = 128,
@@ -203,6 +210,9 @@ def Encoder(
 ):
     images_in.set_shape([None, num_channels, resolution, resolution])
     images_in = tf.cast(images_in, dtype)
+
+    labels_in.set_shape([None, label_size])
+    labels_in = tf.cast(labels_in, dtype)
 
     for layer_id in range(num_layers):
         with tf.variable_scope('conv%d' % layer_id):
