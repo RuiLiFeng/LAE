@@ -198,7 +198,7 @@ def G_logistic_ns_pathreg(G, D, opt, training_set, minibatch_size, pl_minibatch_
 # VAE loss
 def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatch_shrink=2,
              pl_decay=0.01, pl_weight=2.0,
-             recon_loss='mse', rencon_loss_lambda=1.0, laplace_lambda=None):
+             recon_loss='mse', rencon_loss_lambda=1.0, laplace_lambda=None, **kwargs):
     _ = opt, training_set
     x_out, mu, log_sigma = D.get_output_for(reals, labels, is_training=True)
     recon = G.get_output_for(x_out, labels, is_training=True)
@@ -207,7 +207,7 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
         kld = -tf.reduce_mean(tf.reduce_sum(0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1))
     with tf.variable_scope('recon_loss'):
         rl = -tf.reduce_mean(tf.reduce_sum(
-            reals * tf.log(x_out + 1e-8) + (1 - reals) * tf.log(1 - x_out + 1e-8), [1, 2, 3]))
+            reals * tf.log(recon + 1e-8) + (1 - reals) * tf.log(1 - recon + 1e-8), [1, 2, 3]))
 
     kld = autosummary('Loss/scores/real', kld)
     rl = autosummary('Loss/scores/fake', rl)
