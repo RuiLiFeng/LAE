@@ -156,7 +156,6 @@ def Decoder(
         num_channels    = 3,
         resolution      = 128,
         dtype           = 'float32',
-        num_layers      = 4,
         num_units       = 1024,
         resample_kernel = [1,3,3,1],
         is_training     = True,
@@ -169,6 +168,10 @@ def Decoder(
 
     labels_in.set_shape([None, label_size])
     labels_in = tf.cast(labels_in, dtype)
+
+    resolution_log2 = int(np.log2(resolution))
+    assert resolution == 2 ** resolution_log2 and resolution >= 4
+    num_layers = resolution_log2 * 2 - 2
 
     height = resolution // 2**(num_layers - 1)
     width = resolution // 2 ** (num_layers - 1)
@@ -201,7 +204,6 @@ def Encoder(
         num_channels     = 3,
         resolution       = 128,
         num_units        = 1024,
-        num_layers       = 4,
         dtype            = 'float32',
         is_training      = True,
         resample_kernel  = [1,3,3,1],
@@ -213,6 +215,10 @@ def Encoder(
 
     labels_in.set_shape([None, label_size])
     labels_in = tf.cast(labels_in, dtype)
+
+    resolution_log2 = int(np.log2(resolution))
+    assert resolution == 2 ** resolution_log2 and resolution >= 4
+    num_layers = resolution_log2 * 2 - 2
 
     for layer_id in range(num_layers):
         with tf.variable_scope('conv%d' % layer_id):
