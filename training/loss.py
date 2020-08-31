@@ -211,6 +211,9 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
 
     kld = autosummary('Loss/scores/real', kld)
     rl = autosummary('Loss/scores/fake', rl)
+    mu_norm = autosummary('Loss/scores/mu_norm', tf.norm(mu))
+    sigma_norm = autosummary('Loss/scores/sigma_norm', tf.norm(log_sigma))
+    recon = autosummary('Loss/scores/recon_norm', tf.norm(recon))
     loss = kld + rl
     return loss, None
 
