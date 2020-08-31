@@ -35,7 +35,7 @@ _valid_configs = [
 
 def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, mirror_augment, metrics, dlatent_size):
     train     = EasyDict(run_func_name='training.vae_training_loop.training_loop') # Options for training loop.
-    G         = EasyDict(func_name='training.vae_dcgan.Decoder')       # Options for generator network.
+    G         = EasyDict(func_name='training.vae_dcgan.Decoder_main')       # Options for generator network.
     D         = EasyDict(func_name='training.vae_dcgan.Encoder')  # Options for discriminator network.
     G_opt     = EasyDict(beta1=0.0, beta2=0.99, epsilon=1e-8)                  # Options for generator optimizer.
     D_opt     = EasyDict(beta1=0.0, beta2=0.99, epsilon=1e-8)                  # Options for discriminator optimizer.
