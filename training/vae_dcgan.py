@@ -171,7 +171,7 @@ def Decoder(
 
     resolution_log2 = int(np.log2(resolution))
     assert resolution == 2 ** resolution_log2 and resolution >= 4
-    num_layers = resolution_log2 * 2 - 2
+    num_layers = resolution_log2 - 2
 
     height = resolution // 2**(num_layers - 1)
     width = resolution // 2 ** (num_layers - 1)
@@ -218,7 +218,7 @@ def Encoder(
 
     resolution_log2 = int(np.log2(resolution))
     assert resolution == 2 ** resolution_log2 and resolution >= 4
-    num_layers = resolution_log2 * 2 - 2
+    num_layers = resolution_log2 - 2
 
     for layer_id in range(num_layers):
         with tf.variable_scope('conv%d' % layer_id):
