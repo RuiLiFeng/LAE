@@ -220,7 +220,6 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
     loss = rl + kld
     loss = autosummary('Loss/scores/loss', loss)
 
-    loss = loss * 1.0
     return loss, None
 
 
