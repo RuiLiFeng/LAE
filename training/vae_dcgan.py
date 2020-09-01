@@ -216,7 +216,7 @@ def Decoder_synthesis(
     assert resolution == 2 ** resolution_log2 and resolution >= 4
     num_layers = resolution_log2 - 2
 
-    height = resolution // 2**(num_layers - 1)
+    height = resolution // 2 ** (num_layers - 1)
     width = resolution // 2 ** (num_layers - 1)
 
     with tf.variable_scope('Dense'):

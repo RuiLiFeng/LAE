@@ -44,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
+            <state relative-caret-position="2691">
+              <caret line="218" column="52" lean-forward="true" selection-start-line="218" selection-start-column="52" selection-end-line="218" selection-end-column="52" />
               <folding>
                 <element signature="e#250#268#0" expanded="true" />
               </folding>
@@ -56,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dnnlib/tflib/autosummary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3465">
-              <caret line="117" column="4" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
+            <state relative-caret-position="1452">
+              <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
               <folding>
                 <element signature="e#1037#1072#0" expanded="true" />
               </folding>
@@ -86,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1382">
-              <caret line="222" column="31" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
+            <state relative-caret-position="-29">
+              <caret line="218" column="29" selection-start-line="218" selection-start-column="29" selection-end-line="218" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -129,15 +129,15 @@
         <option value="$PROJECT_DIR$/metrics/decoder_ppl.py" />
         <option value="$PROJECT_DIR$/metrics/metric_defaults.py" />
         <option value="$PROJECT_DIR$/training/vae_training_loop.py" />
-        <option value="$PROJECT_DIR$/training/loss.py" />
         <option value="$PROJECT_DIR$/train_vae.py" />
+        <option value="$PROJECT_DIR$/training/loss.py" />
         <option value="$PROJECT_DIR$/training/vae_dcgan.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="428" />
-    <option name="y" value="333" />
+    <option name="y" value="295" />
     <option name="width" value="1551" />
     <option name="height" value="839" />
   </component>
@@ -228,12 +228,12 @@
       <workItem from="1596611457550" duration="4684000" />
       <workItem from="1597152015058" duration="1730000" />
       <workItem from="1598771584868" duration="14729000" />
-      <workItem from="1598959906050" duration="14423000" />
+      <workItem from="1598959906050" duration="15183000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35566000" />
+    <option name="totallyTimeSpent" value="36326000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -400,16 +400,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/loss.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
-          <folding>
-            <element signature="e#250#268#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_training.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-264">
@@ -434,16 +424,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dnnlib/tflib/autosummary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3465">
-          <caret line="117" column="4" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
-          <folding>
-            <element signature="e#1037#1072#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dnnlib/tflib/ops/upfirdn_2d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -451,10 +431,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dnnlib/tflib/autosummary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+          <folding>
+            <element signature="e#1037#1072#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/loss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2691">
+          <caret line="218" column="52" lean-forward="true" selection-start-line="218" selection-start-column="52" selection-end-line="218" selection-end-column="52" />
+          <folding>
+            <element signature="e#250#268#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1382">
-          <caret line="222" column="31" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
+        <state relative-caret-position="-29">
+          <caret line="218" column="29" selection-start-line="218" selection-start-column="29" selection-end-line="218" selection-end-column="29" />
         </state>
       </provider>
     </entry>
