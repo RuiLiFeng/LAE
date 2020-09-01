@@ -287,16 +287,12 @@ def training_loop(
             if len(rounds) == 1:
                 tflib.run(data_fetch_op, feed_dict)
                 tflib.run([G_train_op, D_train_op, Gs_update_op], feed_dict)
-                l_ = tflib.run(loss, feed_dict)
-                print(l_)
 
             # Slow path with gradient accumulation.
             else:
                 for _round in rounds:
                     tflib.run(data_fetch_op, feed_dict)
                     tflib.run([G_train_op, D_train_op], feed_dict)
-                    l_ = tflib.run(loss, feed_dict)
-                    print(l_)
                 tflib.run(Gs_update_op, feed_dict)
 
         # Perform maintenance tasks once per tick.

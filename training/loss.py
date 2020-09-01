@@ -211,12 +211,12 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
         # rl = -tf.reduce_mean(tf.reduce_sum(
         #     reals * tf.log(recon + 1e-8) + (1 - reals) * tf.log(1 - recon + 1e-8), [1, 2, 3]))
 
-    kld = autosummary('Loss/scores/real', kld)
-    rl = autosummary('Loss/scores/fake', rl)
+    kld = autosummary('Loss/scores/kld', kld)
+    rl = autosummary('Loss/scores/rl', rl)
+    loss = autosummary('Loss/scores/loss', rl + kld)
     mu_norm = autosummary('Loss/scores/mu_norm', tf.reduce_sum(tf.square(mu)))
     sigma_norm = autosummary('Loss/scores/sigma_norm', tf.reduce_sum(tf.square(log_sigma)))
     recon = autosummary('Loss/scores/recon_norm', tf.reduce_sum(tf.square(recon)))
-    loss = kld + rl
-    return loss, None
+    return loss, (mu_norm, sigma_norm, recon)
 
 
