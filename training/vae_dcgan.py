@@ -234,7 +234,7 @@ def Decoder_synthesis(
 
     with tf.variable_scope('toRGB'):
         z = conv2d_layer(z, fmaps=num_channels, kernel=1)
-        images_out = apply_bias_act(z, act)
+        images_out = apply_bias_act(z, act='tanh')
 
     return tf.identity(images_out, name='images_out')
 
