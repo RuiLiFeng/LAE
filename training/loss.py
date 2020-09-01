@@ -207,13 +207,18 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
     log_sigma = autosummary('Loss/scores/sigma', log_sigma)
     recon = autosummary('Loss/scores/recon', recon)
 
-    kld = autosummary('Loss/scores/kld', -tf.reduce_mean(tf.reduce_sum(
-        0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1)))
-    rl = autosummary('Loss/scores/rl', 2 * tf.reduce_mean(tf.reduce_sum(
-        tf.square(reals - recon), [1, 2, 3])))
+    kld = -tf.reduce_mean(tf.reduce_sum(
+        0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1))
+    rl = 2 * tf.reduce_mean(tf.reduce_sum(
+        tf.square(reals - recon), [1, 2, 3]))
+
+    kld = autosummary('Loss/scores/kld', kld)
+    rl = autosummary('Loss/scores/rl', rl)
         # rl = -tf.reduce_mean(tf.reduce_sum(
         #     reals * tf.log(recon + 1e-8) + (1 - reals) * tf.log(1 - recon + 1e-8), [1, 2, 3]))
-    loss = autosummary('Loss/scores/loss', rl + kld)
+
+    loss = rl + kld
+    loss = autosummary('Loss/scores/loss', loss)
 
     loss = loss * 1.0
     return loss, None
