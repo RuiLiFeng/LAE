@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="" />
+    <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/train_vae.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_vae.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_vae.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="60" column="51" lean-forward="true" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
+            <state relative-caret-position="235">
+              <caret line="57" column="63" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
               <folding>
                 <element signature="e#227#242#0" expanded="true" />
               </folding>
@@ -38,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3117">
-              <caret line="112" column="14" selection-start-line="112" selection-start-column="14" selection-end-line="112" selection-end-column="14" />
+            <state relative-caret-position="282">
+              <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
               <folding>
                 <element signature="e#250#268#0" expanded="true" />
               </folding>
@@ -127,12 +129,12 @@
         <option value="$PROJECT_DIR$/metrics/metric_defaults.py" />
         <option value="$PROJECT_DIR$/training/vae_training_loop.py" />
         <option value="$PROJECT_DIR$/training/vae_dcgan.py" />
-        <option value="$PROJECT_DIR$/train_vae.py" />
         <option value="$PROJECT_DIR$/training/loss.py" />
+        <option value="$PROJECT_DIR$/train_vae.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="428" />
     <option name="y" value="295" />
     <option name="width" value="1551" />
@@ -225,16 +227,15 @@
       <workItem from="1596611457550" duration="4684000" />
       <workItem from="1597152015058" duration="1730000" />
       <workItem from="1598771584868" duration="14729000" />
-      <workItem from="1598959906050" duration="16657000" />
+      <workItem from="1598959906050" duration="17493000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37800000" />
+    <option name="totallyTimeSpent" value="38636000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11727079" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -436,22 +437,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_vae.py">
+    <entry file="file://$PROJECT_DIR$/training/loss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="60" column="51" lean-forward="true" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
+        <state relative-caret-position="282">
+          <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
           <folding>
-            <element signature="e#227#242#0" expanded="true" />
+            <element signature="e#250#268#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/loss.py">
+    <entry file="file://$PROJECT_DIR$/train_vae.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3117">
-          <caret line="112" column="14" selection-start-line="112" selection-start-column="14" selection-end-line="112" selection-end-column="14" />
+        <state relative-caret-position="235">
+          <caret line="57" column="63" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
           <folding>
-            <element signature="e#250#268#0" expanded="true" />
+            <element signature="e#227#242#0" expanded="true" />
           </folding>
         </state>
       </provider>

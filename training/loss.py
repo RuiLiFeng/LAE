@@ -207,12 +207,10 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
     log_sigma = autosummary('Loss/scores/sigma', log_sigma)
     recon = autosummary('Loss/scores/recon', recon)
 
-    with tf.name_scope('KL_divergence'):
-        kld = autosummary('Loss/scores/kld', -tf.reduce_mean(tf.reduce_sum(
-            0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1)))
-    with tf.name_scope('recon_loss'):
-        rl = autosummary('Loss/scores/rl', 2 * tf.reduce_mean(tf.reduce_sum(
-            tf.square(reals - recon), [1, 2, 3])))
+    kld = autosummary('Loss/scores/kld', -tf.reduce_mean(tf.reduce_sum(
+        0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1)))
+    rl = autosummary('Loss/scores/rl', 2 * tf.reduce_mean(tf.reduce_sum(
+        tf.square(reals - recon), [1, 2, 3])))
         # rl = -tf.reduce_mean(tf.reduce_sum(
         #     reals * tf.log(recon + 1e-8) + (1 - reals) * tf.log(1 - recon + 1e-8), [1, 2, 3]))
     loss = autosummary('Loss/scores/loss', rl + kld)
