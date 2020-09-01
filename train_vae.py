@@ -33,7 +33,7 @@ _valid_configs = [
 
 #----------------------------------------------------------------------------
 
-def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, mirror_augment, metrics, dlatent_size):
+def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, mirror_augment, metrics, dlatent_size, lr_mul):
     train     = EasyDict(run_func_name='training.vae_training_loop.training_loop') # Options for training loop.
     G         = EasyDict(func_name='training.vae_dcgan.Decoder_main')       # Options for generator network.
     D         = EasyDict(func_name='training.vae_dcgan.Encoder')  # Options for discriminator network.
@@ -50,8 +50,9 @@ def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, m
     train.total_kimg = total_kimg
     train.mirror_augment = mirror_augment
     train.image_snapshot_ticks = train.network_snapshot_ticks = 10
-    sched.G_lrate_base = sched.D_lrate_base = 0.002
-    sched.G_lrate_dict = sched.D_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.003, 1024: 0.003}
+    sched.G_lrate_base = sched.D_lrate_base = 0.002 * lr_mul
+    sched.G_lrate_dict = sched.D_lrate_dict = {128: 0.0015 * lr_mul, 256: 0.002 * lr_mul,
+                                               512: 0.003 * lr_mul, 1024: 0.003 * lr_mul}
     sched.minibatch_size_base = 32  # (default)
     sched.minibatch_size_dict = {8: 256, 16: 128, 32: 64, 64: 1024*4}
     sched.minibatch_gpu_base = 4  # (default)
@@ -133,6 +134,7 @@ def main():
     parser.add_argument('--dataset', help='Training dataset', required=True)
     parser.add_argument('--config', help='Training config (default: %(default)s)', default='config-f', required=True, dest='config_id', metavar='CONFIG')
     parser.add_argument('--num-gpus', help='Number of GPUs (default: %(default)s)', default=1, type=int, metavar='N')
+    parser.add_argument('--lr-mul', help='Number of GPUs (default: %(default)s)', default=1.0, type=float, metavar='N')
     parser.add_argument('--total-kimg', help='Training length in thousands of images (default: %(default)s)', metavar='KIMG', default=25000, type=int)
     parser.add_argument('--gamma', help='R1 regularization weight (default is config dependent)', default=None, type=float)
     parser.add_argument('--mirror-augment', help='Mirror augment (default: %(default)s)', default=False, metavar='BOOL', type=_str_to_bool)
