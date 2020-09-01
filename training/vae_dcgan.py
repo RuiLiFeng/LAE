@@ -226,7 +226,7 @@ def Decoder_synthesis(
 
     for layer_id in range(num_layers - 1):
         with tf.variable_scope('conv%d' % layer_id):
-            scale = 2 ** (num_layers + 1)
+            scale = 2 ** (layer_id + 1)
             z = conv2d_layer(z, num_units // scale, kernel=3, up=True, resample_kernel=resample_kernel)
             z = apply_bias_act(z, bias_var='conv_bias')
             z = tf.layers.batch_normalization(z, training=is_training)

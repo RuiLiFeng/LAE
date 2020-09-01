@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/training/vae_dcgan.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vae_dcgan.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,8 +86,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
+            <state relative-caret-position="-1382">
+              <caret line="222" column="31" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dnnlib/tflib/ops/upfirdn_2d.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="295" column="4" selection-start-line="295" selection-start-column="4" selection-end-line="295" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -117,11 +127,11 @@
         <option value="$PROJECT_DIR$/metrics/perceptual_path_length.py" />
         <option value="$PROJECT_DIR$/metrics/precision_recall.py" />
         <option value="$PROJECT_DIR$/metrics/decoder_ppl.py" />
-        <option value="$PROJECT_DIR$/training/vae_dcgan.py" />
         <option value="$PROJECT_DIR$/metrics/metric_defaults.py" />
         <option value="$PROJECT_DIR$/training/vae_training_loop.py" />
         <option value="$PROJECT_DIR$/training/loss.py" />
         <option value="$PROJECT_DIR$/train_vae.py" />
+        <option value="$PROJECT_DIR$/training/vae_dcgan.py" />
       </list>
     </option>
   </component>
@@ -218,16 +228,15 @@
       <workItem from="1596611457550" duration="4684000" />
       <workItem from="1597152015058" duration="1730000" />
       <workItem from="1598771584868" duration="14729000" />
-      <workItem from="1598959906050" duration="14176000" />
+      <workItem from="1598959906050" duration="14423000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35319000" />
+    <option name="totallyTimeSpent" value="35566000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11727079" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -266,13 +275,6 @@
     </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/tensorflow/python/ops/nn_impl.py" />
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/tensorflow/python/layers/normalization.py" />
-    <entry file="file://$PROJECT_DIR$/dnnlib/tflib/ops/upfirdn_2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-866">
-          <caret line="295" column="4" selection-start-line="295" selection-start-column="4" selection-end-line="295" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/training/dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -442,10 +444,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dnnlib/tflib/ops/upfirdn_2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="295" column="4" selection-start-line="295" selection-start-column="4" selection-end-line="295" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
+        <state relative-caret-position="-1382">
+          <caret line="222" column="31" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
         </state>
       </provider>
     </entry>
