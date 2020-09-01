@@ -54,9 +54,9 @@ def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, m
     sched.G_lrate_dict = sched.D_lrate_dict = {128: 0.0015 * lr_mul, 256: 0.002 * lr_mul,
                                                512: 0.003 * lr_mul, 1024: 0.003 * lr_mul}
     sched.minibatch_size_base = 32  # (default)
-    sched.minibatch_size_dict = {8: 256, 16: 128, 32: 64, 64: 1024*4}
+    sched.minibatch_size_dict = {8: 256, 16: 128, 32: 64, 64: 1024*2}
     sched.minibatch_gpu_base = 4  # (default)
-    sched.minibatch_gpu_dict = {8: 32, 16: 16, 32: 8, 64: 128*4}
+    sched.minibatch_gpu_dict = {8: 32, 16: 16, 32: 8, 64: 128*2}
 
     D_loss.gamma = 10
     metrics = [metric_defaults[x] for x in metrics]
@@ -64,7 +64,8 @@ def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, m
 
     G.dlatent_size = dlatent_size
     D.dlatent_size = dlatent_size
-    G.num_units = D.num_units = 512
+    G.num_units = D.num_units = 1024
+    G.act = D.act = 'relu'
 
     desc += '-' + dataset
     dataset_args = EasyDict(tfrecord_dir=dataset)
