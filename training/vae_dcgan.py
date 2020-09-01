@@ -262,11 +262,12 @@ def Encoder(
     resolution_log2 = int(np.log2(resolution))
     assert resolution == 2 ** resolution_log2 and resolution >= 4
     num_layers = resolution_log2 - 2
+    x = images_in
 
     for layer_id in range(num_layers):
         with tf.variable_scope('conv%d' % layer_id):
             scale = 2 ** (num_layers - layer_id - 1)
-            x = conv2d_layer(images_in, num_units // scale, 3, down=True, resample_kernel=resample_kernel)
+            x = conv2d_layer(x, num_units // scale, 3, down=True, resample_kernel=resample_kernel)
             x = tf.layers.batch_normalization(x, training=is_training)
             x = apply_bias_act(x, act)
 
