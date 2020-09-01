@@ -203,6 +203,10 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
     x_out, mu, log_sigma = D.get_output_for(reals, labels, is_training=True)
     recon = G.get_output_for(x_out, labels, is_training=True)
 
+    mu = autosummary('Loss/scores/mu', mu)
+    log_sigma = autosummary('Loss/scores/sigma', log_sigma)
+    recon = autosummary('Loss/scores/recon', recon)
+
     with tf.variable_scope('KL_divergence'):
         kld = -tf.reduce_mean(tf.reduce_sum(0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1))
     with tf.variable_scope('recon_loss'):
@@ -214,9 +218,6 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
     kld = autosummary('Loss/scores/kld', kld)
     rl = autosummary('Loss/scores/rl', rl)
     loss = autosummary('Loss/scores/loss', rl + kld)
-    mu_norm = autosummary('Loss/scores/mu_norm', tf.reduce_sum(tf.square(mu)))
-    sigma_norm = autosummary('Loss/scores/sigma_norm', tf.reduce_sum(tf.square(log_sigma)))
-    recon = autosummary('Loss/scores/recon_norm', tf.reduce_sum(tf.square(recon)))
-    return loss, (mu_norm, sigma_norm, recon)
+    return loss, None
 
 
