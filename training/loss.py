@@ -215,8 +215,9 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
             tf.square(reals - recon), [1, 2, 3])))
         # rl = -tf.reduce_mean(tf.reduce_sum(
         #     reals * tf.log(recon + 1e-8) + (1 - reals) * tf.log(1 - recon + 1e-8), [1, 2, 3]))
-
     loss = autosummary('Loss/scores/loss', rl + kld)
+
+    loss = loss * 1.0
     return loss, None
 
 
