@@ -282,12 +282,12 @@ def training_loop(
 
             # Fast path without gradient accumulation.
             if len(rounds) == 1:
-                tflib.run([G_train_op, data_fetch_op, D_train_op, Gs_update_op], feed_dict)
+                tflib.run([data_fetch_op, G_train_op, D_train_op, Gs_update_op], feed_dict)
 
             # Slow path with gradient accumulation.
             else:
                 for _round in rounds:
-                    tflib.run([G_train_op, data_fetch_op, D_train_op], feed_dict)
+                    tflib.run([data_fetch_op, G_train_op, D_train_op], feed_dict)
                 tflib.run(Gs_update_op, feed_dict)
 
         # Perform maintenance tasks once per tick.
