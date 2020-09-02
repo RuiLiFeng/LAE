@@ -209,7 +209,7 @@ def vae_loss(G, D, opt, training_set, minibatch_size, reals, labels, pl_minibatc
 
     kld = -tf.reduce_mean(tf.reduce_sum(
         0.5 * (1 + log_sigma - mu ** 2 - tf.exp(log_sigma)), 1))
-    rl = 2 * tf.reduce_mean(tf.reduce_sum(
+    rl = tf.reduce_mean(tf.reduce_sum(
         tf.square(reals - recon), [1, 2, 3]))
 
     kld = autosummary('Loss/scores/kld', kld)
