@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd6dde8e-fe71-4c87-885e-c0bece75c474" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/training/vae_dcgan.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/vae_dcgan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,22 +60,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/vae_training_loop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="231" column="34" selection-start-line="231" selection-start-column="34" selection-end-line="231" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dnnlib/tflib/optimizer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4488">
-              <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
+            <state relative-caret-position="362">
+              <caret line="314" column="41" selection-start-line="314" selection-start-column="41" selection-end-line="314" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dnnlib/tflib/optimizer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2607">
+              <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/vae_dcgan.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="121">
@@ -138,18 +138,18 @@
         <option value="$PROJECT_DIR$/metrics/precision_recall.py" />
         <option value="$PROJECT_DIR$/metrics/decoder_ppl.py" />
         <option value="$PROJECT_DIR$/metrics/metric_defaults.py" />
-        <option value="$PROJECT_DIR$/training/vae_training_loop.py" />
         <option value="$PROJECT_DIR$/training/loss.py" />
         <option value="$PROJECT_DIR$/train_vae.py" />
         <option value="$PROJECT_DIR$/training/vae_dcgan.py" />
+        <option value="$PROJECT_DIR$/training/vae_training_loop.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="130" />
-    <option name="y" value="74" />
-    <option name="width" value="1551" />
-    <option name="height" value="839" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -239,15 +239,16 @@
       <workItem from="1597152015058" duration="1730000" />
       <workItem from="1598771584868" duration="14729000" />
       <workItem from="1598959906050" duration="21146000" />
-      <workItem from="1599013082948" duration="5251000" />
+      <workItem from="1599013082948" duration="6357000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47540000" />
+    <option name="totallyTimeSpent" value="48646000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09488273" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -430,20 +431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dnnlib/tflib/optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4488">
-          <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/vae_training_loop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="231" column="34" selection-start-line="231" selection-start-column="34" selection-end-line="231" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dnnlib/tflib/autosummary.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
@@ -485,6 +472,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="285" lean-forward="true" selection-start-line="285" selection-end-line="285" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/vae_training_loop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="314" column="41" selection-start-line="314" selection-start-column="41" selection-end-line="314" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dnnlib/tflib/optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2607">
+          <caret line="155" column="8" selection-start-line="155" selection-start-column="8" selection-end-line="155" selection-end-column="8" />
         </state>
       </provider>
     </entry>

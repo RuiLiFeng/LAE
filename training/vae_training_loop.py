@@ -184,9 +184,9 @@ def training_loop(
             if 'beta1' in args: args['beta1'] **= mb_ratio
             if 'beta2' in args: args['beta2'] **= mb_ratio
     G_opt = tflib.Optimizer(name='TrainG', **G_opt_args)
-    D_opt = tflib.Optimizer(name='TrainD', **D_opt_args)
+    # D_opt = tflib.Optimizer(name='TrainD', **D_opt_args)
     G_reg_opt = tflib.Optimizer(name='RegG', share=G_opt, **G_opt_args)
-    D_reg_opt = tflib.Optimizer(name='RegD', share=D_opt, **D_opt_args)
+    # D_reg_opt = tflib.Optimizer(name='RegD', share=D_opt, **D_opt_args)
 
     # Build training graph for each GPU.
     data_fetch_ops = []
@@ -218,21 +218,21 @@ def training_loop(
             with tf.control_dependencies(lod_assign_ops):
                 with tf.name_scope('loss'):
                     loss, reg = dnnlib.util.call_func_by_name(G=G_gpu,
-                                                              D=D_gpu, opt=D_opt,
+                                                              D=D_gpu, opt=G_opt,
                                                               training_set=training_set,
                                                               minibatch_size=minibatch_gpu_in,
                                                               reals=reals_read, labels=labels_read, **D_loss_args)
 
             # Register gradients.
-            G_opt.register_gradients(tf.reduce_mean(loss), G_gpu.trainables)
-            D_opt.register_gradients(tf.reduce_mean(loss), D_gpu.trainables)
+            G_opt.register_gradients(tf.reduce_mean(loss), G_gpu.trainables + D_gpu.trainables)
+            # D_opt.register_gradients(tf.reduce_mean(loss), D_gpu.trainables)
 
     # Setup training ops.
     data_fetch_op = tf.group(*data_fetch_ops)
     G_train_op = G_opt.apply_updates()
-    D_train_op = D_opt.apply_updates()
+    # D_train_op = D_opt.apply_updates()
     G_reg_op = G_reg_opt.apply_updates(allow_no_op=True)
-    D_reg_op = D_reg_opt.apply_updates(allow_no_op=True)
+    # D_reg_op = D_reg_opt.apply_updates(allow_no_op=True)
     Gs_update_op = Gs.setup_as_moving_average_of(G, beta=Gs_beta)
 
     # Finalize graph.
@@ -268,7 +268,7 @@ def training_loop(
         training_set.configure(sched.minibatch_gpu, sched.lod)
         if reset_opt_for_new_lod:
             if np.floor(sched.lod) != np.floor(prev_lod) or np.ceil(sched.lod) != np.ceil(prev_lod):
-                G_opt.reset_optimizer_state(); D_opt.reset_optimizer_state()
+                G_opt.reset_optimizer_state(); # D_opt.reset_optimizer_state()
         prev_lod = sched.lod
 
         # Run training ops.
@@ -283,13 +283,13 @@ def training_loop(
             # Fast path without gradient accumulation.
             if len(rounds) == 1:
                 tflib.run(data_fetch_op, feed_dict)
-                loss_, _, _, _ = tflib.run([loss, G_train_op, D_train_op, Gs_update_op], feed_dict)
+                loss_, _, _ = tflib.run([loss, G_train_op, Gs_update_op], feed_dict)
 
             # Slow path with gradient accumulation.
             else:
                 for _round in rounds:
                     tflib.run(data_fetch_op, feed_dict)
-                    loss_, _, _ = tflib.run([loss, G_train_op, D_train_op], feed_dict)
+                    loss_, _ = tflib.run([loss, G_train_op], feed_dict)
                 tflib.run(Gs_update_op, feed_dict)
 
         # Perform maintenance tasks once per tick.
