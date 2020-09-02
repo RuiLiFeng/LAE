@@ -230,7 +230,6 @@ def Decoder_synthesis(
             _out_shape = [tf.shape(z)[0], num_units // scale, height * scale,
                           width * scale]
             z = deconv2d(z, _out_shape, stddev=0.0099999, conv_filters_dim=5)
-            z = apply_bias_act(z, bias_var='conv_bias')
             z = tf.layers.batch_normalization(z, training=is_training)
             z = apply_bias_act(z, act, bias_var='bn_bias')
 
@@ -317,10 +316,7 @@ def deconv2d(input_, output_shape, d_h=2, d_w=2, stddev=0.02, scope=None, conv_f
         deconv = tf.nn.conv2d_transpose(
             input_, w, output_shape=output_shape,
             strides=[1, d_h, d_w, 1], padding=padding,  data_format="NCHW")
-        biases = tf.get_variable(
-            'b', [output_shape[-1]],
-            initializer=tf.constant_initializer(0.0))
-        deconv = tf.nn.bias_add(deconv, biases)
+        deconv = apply_bias_act(deconv)
     return deconv
 
 
@@ -333,9 +329,7 @@ def conv2d(inputs, output_dim, k_h, k_w, d_h, d_w, stddev=0.02, name="conv2d",
             initializer=weight_initializer(stddev=stddev))
         outputs = tf.nn.conv2d(inputs, w, strides=[1, d_h, d_w, 1], padding="SAME", data_format="NCHW")
         if use_bias:
-            bias = tf.get_variable(
-                "bias", [output_dim], initializer=tf.constant_initializer(0.0))
-            outputs += bias
+            outputs = apply_bias_act(outputs)
     return outputs
 
 
