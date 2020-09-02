@@ -224,7 +224,7 @@ def training_loop(
                                                               reals=reals_read, labels=labels_read, **D_loss_args)
 
             # Register gradients.
-            G_opt.register_gradients(tf.reduce_mean(loss), G_gpu.trainables + D_gpu.trainables)
+            G_opt.register_gradients(tf.reduce_mean(loss), {**G_gpu.trainables, **D_gpu.trainables})
             # D_opt.register_gradients(tf.reduce_mean(loss), D_gpu.trainables)
 
     # Setup training ops.
