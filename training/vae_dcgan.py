@@ -227,7 +227,9 @@ def Decoder_synthesis(
     for layer_id in range(num_layers - 1):
         with tf.variable_scope('conv%d' % layer_id):
             scale = 2 ** (layer_id + 1)
-            z = conv2d_layer(z, num_units // scale, kernel=3, up=True, resample_kernel=resample_kernel)
+            _out_shape = [tf.shape(z)[0], height * scale,
+                          width * scale, num_units // scale]
+            z = deconv2d(z, _out_shape, stddev=0.0099999, conv_filters_dim=5)
             z = apply_bias_act(z, bias_var='conv_bias')
             z = tf.layers.batch_normalization(z, training=is_training)
             z = apply_bias_act(z, act, bias_var='bn_bias')
@@ -267,7 +269,7 @@ def Encoder(
     for layer_id in range(num_layers):
         with tf.variable_scope('conv%d' % layer_id):
             scale = 2 ** (num_layers - layer_id - 1)
-            x = conv2d_layer(x, num_units // scale, 3, down=True, resample_kernel=resample_kernel)
+            x = conv2d(x, num_units // scale, k_w=5, k_h=5, d_h=2, d_w=2, stddev=0.0099999)
             x = tf.layers.batch_normalization(x, training=is_training)
             x = apply_bias_act(x, act)
 
@@ -295,3 +297,63 @@ def reparametric(mu, log_sigma, distribution='normal', name=None):
     else:
         z = tf.multiply(epi, sigma) + mu
     return z
+
+
+def deconv2d(input_, output_shape, d_h=2, d_w=2, stddev=0.02, scope=None, conv_filters_dim=None, padding='SAME'):
+    """Transposed convolution (fractional stride convolution) layer.
+    """
+
+    shape = input_.get_shape().as_list()
+    k_h = conv_filters_dim
+    k_w = k_h
+
+    assert len(shape) == 4, 'Conv2d_transpose works only with 4d tensors.'
+    assert len(output_shape) == 4, 'outut_shape should be 4dimensional'
+
+    with tf.variable_scope(scope or "deconv2d"):
+        w = tf.get_variable(
+            'filter', [k_h, k_w, output_shape[-1], shape[-1]],
+            initializer=tf.random_normal_initializer(stddev=stddev))
+        deconv = tf.nn.conv2d_transpose(
+            input_, w, output_shape=output_shape,
+            strides=[1, d_h, d_w, 1], padding=padding,  data_format="NCHW")
+        biases = tf.get_variable(
+            'b', [output_shape[-1]],
+            initializer=tf.constant_initializer(0.0))
+        deconv = tf.nn.bias_add(deconv, biases)
+    return deconv
+
+
+def conv2d(inputs, output_dim, k_h, k_w, d_h, d_w, stddev=0.02, name="conv2d",
+           use_sn=False, use_bias=True):
+    """Performs 2D convolution of the input."""
+    with tf.variable_scope(name):
+        w = tf.get_variable(
+            "kernel", [k_h, k_w, inputs.shape[-1].value, output_dim],
+            initializer=weight_initializer(stddev=stddev))
+        outputs = tf.nn.conv2d(inputs, w, strides=[1, d_h, d_w, 1], padding="SAME", data_format="NCHW")
+        if use_bias:
+            bias = tf.get_variable(
+                "bias", [output_dim], initializer=tf.constant_initializer(0.0))
+            outputs += bias
+    return outputs
+
+
+def weight_initializer(initializer="orthogonal", stddev=0.02):
+    """Returns the initializer for the given name.
+
+    Args:
+      initializer: Name of the initalizer. Use one in consts.INITIALIZERS.
+      stddev: Standard deviation passed to initalizer.
+
+    Returns:
+      Initializer from `tf.initializers`.
+    """
+    if initializer == "normal":
+        return tf.initializers.random_normal(stddev=stddev)
+    if initializer == "truncated":
+        return tf.initializers.truncated_normal(stddev=stddev)
+    if initializer == "orthogonal":
+        return tf.initializers.orthogonal()
+    raise ValueError("Unknown weight initializer {}.".format(initializer))
+
