@@ -227,8 +227,8 @@ def Decoder_synthesis(
     for layer_id in range(num_layers - 1):
         with tf.variable_scope('conv%d' % layer_id):
             scale = 2 ** (layer_id + 1)
-            _out_shape = [tf.shape(z)[0], height * scale,
-                          width * scale, num_units // scale]
+            _out_shape = [tf.shape(z)[0], num_units // scale, height * scale,
+                          width * scale]
             z = deconv2d(z, _out_shape, stddev=0.0099999, conv_filters_dim=5)
             z = apply_bias_act(z, bias_var='conv_bias')
             z = tf.layers.batch_normalization(z, training=is_training)
@@ -312,7 +312,7 @@ def deconv2d(input_, output_shape, d_h=2, d_w=2, stddev=0.02, scope=None, conv_f
 
     with tf.variable_scope(scope or "deconv2d"):
         w = tf.get_variable(
-            'filter', [k_h, k_w, output_shape[-1], shape[-1]],
+            'filter', [k_h, k_w, output_shape[1], shape[1]],
             initializer=tf.random_normal_initializer(stddev=stddev))
         deconv = tf.nn.conv2d_transpose(
             input_, w, output_shape=output_shape,
@@ -329,7 +329,7 @@ def conv2d(inputs, output_dim, k_h, k_w, d_h, d_w, stddev=0.02, name="conv2d",
     """Performs 2D convolution of the input."""
     with tf.variable_scope(name):
         w = tf.get_variable(
-            "kernel", [k_h, k_w, inputs.shape[-1].value, output_dim],
+            "kernel", [k_h, k_w, inputs.shape[1].value, output_dim],
             initializer=weight_initializer(stddev=stddev))
         outputs = tf.nn.conv2d(inputs, w, strides=[1, d_h, d_w, 1], padding="SAME", data_format="NCHW")
         if use_bias:
