@@ -315,7 +315,7 @@ def deconv2d(input_, output_shape, d_h=2, d_w=2, stddev=0.02, scope=None, conv_f
             initializer=tf.random_normal_initializer(stddev=stddev))
         deconv = tf.nn.conv2d_transpose(
             input_, w, output_shape=output_shape,
-            strides=[1, d_h, d_w, 1], padding=padding,  data_format="NCHW")
+            strides=[1, 1, d_h, d_w], padding=padding,  data_format="NCHW")
         deconv = apply_bias_act(deconv)
     return deconv
 
@@ -327,7 +327,7 @@ def conv2d(inputs, output_dim, k_h, k_w, d_h, d_w, stddev=0.02, name="conv2d",
         w = tf.get_variable(
             "kernel", [k_h, k_w, inputs.shape[1].value, output_dim],
             initializer=weight_initializer(stddev=stddev))
-        outputs = tf.nn.conv2d(inputs, w, strides=[1, d_h, d_w, 1], padding="SAME", data_format="NCHW")
+        outputs = tf.nn.conv2d(inputs, w, strides=[1, 1, d_h, d_w], padding="SAME", data_format="NCHW")
         if use_bias:
             outputs = apply_bias_act(outputs)
     return outputs
