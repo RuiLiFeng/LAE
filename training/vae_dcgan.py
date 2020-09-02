@@ -220,7 +220,7 @@ def Decoder_synthesis(
     width = resolution // 2 ** (num_layers - 1)
 
     with tf.variable_scope('Dense'):
-        z = dense_layer(dlatents_in, num_units * height * width)
+        z = linear(dlatents_in, num_units * height * width)
         z = tf.reshape(z, [-1, num_units, height, width])
         z = apply_bias_act(z, act)
 
@@ -275,9 +275,9 @@ def Encoder(
     x = tf.reshape(x, [-1, np.prod(x.shape[1:])])
 
     with tf.variable_scope('mu'):
-        mu = dense_layer(x, dlatent_size)
+        mu = linear(x, dlatent_size)
     with tf.variable_scope('log_sigma'):
-        log_sigma = dense_layer(x, dlatent_size)
+        log_sigma = linear(x, dlatent_size)
     with tf.variable_scope('reparametric'):
         dlatents_out = reparametric(mu, log_sigma)
 
@@ -351,3 +351,21 @@ def weight_initializer(initializer="orthogonal", stddev=0.02):
         return tf.initializers.orthogonal()
     raise ValueError("Unknown weight initializer {}.".format(initializer))
 
+
+def linear(inputs, output_size, scope=None, stddev=0.02, bias_start=0.0,
+           use_sn=False, use_bias=True):
+    """Linear layer without the non-linear activation applied."""
+    shape = inputs.get_shape().as_list()
+    with tf.variable_scope(scope or "linear"):
+        kernel = tf.get_variable(
+            "kernel",
+            [shape[1], output_size],
+            initializer=weight_initializer(stddev=stddev))
+        outputs = tf.matmul(inputs, kernel)
+        if use_bias:
+            bias = tf.get_variable(
+                "bias",
+                [output_size],
+                initializer=tf.constant_initializer(bias_start))
+            outputs += bias
+        return outputs
