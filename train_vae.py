@@ -33,7 +33,7 @@ _valid_configs = [
 
 #----------------------------------------------------------------------------
 
-def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, mirror_augment, metrics, dlatent_size, lr_mul):
+def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, mirror_augment, metrics, dlatent_size, lr_mul, batchsize_mul, gpubatchsize_mul):
     train     = EasyDict(run_func_name='training.vae_training_loop.training_loop') # Options for training loop.
     G         = EasyDict(func_name='training.vae_dcgan.Decoder_main')       # Options for generator network.
     D         = EasyDict(func_name='training.vae_dcgan.Encoder')  # Options for discriminator network.
@@ -54,9 +54,9 @@ def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, m
     sched.G_lrate_dict = sched.D_lrate_dict = {128: 0.0015 * lr_mul, 256: 0.002 * lr_mul,
                                                512: 0.003 * lr_mul, 1024: 0.003 * lr_mul}
     sched.minibatch_size_base = 32  # (default)
-    sched.minibatch_size_dict = {8: 256, 16: 128, 32: 64, 64: 1024*2}
+    sched.minibatch_size_dict = {8: 256, 16: 128, 32: 64, 64: 32 * batchsize_mul}
     sched.minibatch_gpu_base = 4  # (default)
-    sched.minibatch_gpu_dict = {8: 32, 16: 16, 32: 8, 64: 128*2}
+    sched.minibatch_gpu_dict = {8: 32, 16: 16, 32: 8, 64: 4 * gpubatchsize_mul}
 
     D_loss.gamma = 10
     metrics = [metric_defaults[x] for x in metrics]
@@ -141,6 +141,10 @@ def main():
     parser.add_argument('--mirror-augment', help='Mirror augment (default: %(default)s)', default=False, metavar='BOOL', type=_str_to_bool)
     parser.add_argument('--metrics', help='Comma-separated list of metrics or "none" (default: %(default)s)', default='fid50k', type=_parse_comma_sep)
     parser.add_argument('--dlatent-size', help='Number of GPUs (default: %(default)s)', default=128, type=int, metavar='N')
+    parser.add_argument('--batchsize-mul', help='Number of GPUs (default: %(default)s)', default=64, type=int,
+                        metavar='N')
+    parser.add_argument('--gpubatchsize-mul', help='Number of GPUs (default: %(default)s)', default=64, type=int,
+                        metavar='N')
 
     args = parser.parse_args()
 
