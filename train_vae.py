@@ -34,7 +34,7 @@ _valid_configs = [
 #----------------------------------------------------------------------------
 
 def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, mirror_augment,
-        metrics, dlatent_size, lr, batch_size, decay_step, decay_rate, stair):
+        metrics, dlatent_size, lr, batch_size, decay_step, decay_rate, stair, tick_kimg):
     train     = EasyDict(run_func_name='training.vae_training_loop.training_loop') # Options for training loop.
     G         = EasyDict(func_name='training.vae_dcgan.Decoder_main')       # Options for generator network.
     D         = EasyDict(func_name='training.vae_dcgan.Encoder')  # Options for discriminator network.
@@ -57,6 +57,7 @@ def run(dataset, data_dir, result_dir, config_id, num_gpus, total_kimg, gamma, m
     sched.decay_step = decay_step
     sched.decay_rate = decay_rate
     sched.stair = stair
+    sched.tick_kimg = tick_kimg
 
     D_loss.gamma = 10
     metrics = [metric_defaults[x] for x in metrics]
@@ -144,6 +145,8 @@ def main():
     parser.add_argument('--batch-size', help='Number of GPUs (default: %(default)s)', default=256, type=int,
                         metavar='N')
     parser.add_argument('--decay-step', help='Number of GPUs (default: %(default)s)', default=50000, type=int,
+                        metavar='N')
+    parser.add_argument('--tick-kimg', help='Number of GPUs (default: %(default)s)', default=16, type=int,
                         metavar='N')
     parser.add_argument('--decay-rate', help='Number of GPUs (default: %(default)s)', default=0.5, type=float,
                         metavar='N')

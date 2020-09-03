@@ -211,7 +211,7 @@ def training_loop(
         loss_, _, _, lr_ = tflib.run([loss, G_train_op, D_train_op, learning_rate])
         cur_nimg += sched_args.batch_size * num_gpus
         done = (cur_nimg >= total_kimg * 1000)
-        if cur_tick < 0 or cur_nimg >= tick_start_nimg + sched.tick_kimg * 1000 or done:
+        if cur_tick < 0 or cur_nimg >= tick_start_nimg + sched_args.tick_kimg * 1000 or done:
             cur_tick += 1
             tick_kimg = (cur_nimg - tick_start_nimg) / 1000.0
             tick_start_nimg = cur_nimg
