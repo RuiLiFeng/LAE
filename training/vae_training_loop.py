@@ -170,9 +170,9 @@ def training_loop(
                                                         training_set.dynamic_range, drange_net)
 
             with tf.name_scope('Loss'), tf.control_dependencies(None):
-                loss = dnnlib.util.call_func_by_name(G=G_gpu, D=D_gpu, opt=D_opt, training_set=training_set,
-                                                     minibatch_size=sched_args.batch_size, reals=reals_read,
-                                                     labels=labels_read, **D_loss_args)
+                loss, reg = dnnlib.util.call_func_by_name(G=G_gpu, D=D_gpu, opt=D_opt, training_set=training_set,
+                                                          minibatch_size=sched_args.batch_size, reals=reals_read,
+                                                          labels=labels_read, **D_loss_args)
             with tf.control_dependencies([add_global]):
                 G_opt.register_gradients(loss, G_gpu.trainables)
                 D_opt.register_gradients(loss, D_gpu.trainables)
