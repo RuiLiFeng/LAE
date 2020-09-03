@@ -209,7 +209,7 @@ def training_loop(
         if dnnlib.RunContext.get().should_stop(): break
 
         loss_, _, _, lr_ = tflib.run([loss, G_train_op, D_train_op, learning_rate])
-        cur_nimg += sched_args.batch_size * num_gpus
+        cur_nimg += sched_args.batch_size
         done = (cur_nimg >= total_kimg * 1000)
         if cur_tick < 0 or cur_nimg >= tick_start_nimg + sched_args.tick_kimg * 1000 or done:
             cur_tick += 1
