@@ -222,7 +222,7 @@ def Decoder_synthesis(
     with tf.variable_scope('Dense'):
         z = linear(dlatents_in, num_units * height * width)
         z = tf.reshape(z, [-1, num_units, height, width])
-        z = apply_bias_act(z, act)
+        z = tf.nn.relu(z)
 
     for layer_id in range(num_layers - 1):
         with tf.variable_scope('conv%d' % layer_id):
@@ -231,11 +231,11 @@ def Decoder_synthesis(
                           width * scale]
             z = deconv2d(z, _out_shape, stddev=0.0099999, conv_filters_dim=5)
             z = tf.layers.batch_normalization(z, training=is_training)
-            z = apply_bias_act(z, act, bias_var='bn_bias')
+            z = tf.nn.relu(z)
 
     with tf.variable_scope('toRGB'):
         z = conv2d_layer(z, fmaps=num_channels, kernel=1)
-        images_out = apply_bias_act(z, act='tanh')
+        images_out = tf.nn.tanh(z)
 
     return tf.identity(images_out, name='images_out')
 
@@ -270,7 +270,7 @@ def Encoder(
             scale = 2 ** (num_layers - layer_id - 1)
             x = conv2d(x, num_units // scale, k_w=5, k_h=5, d_h=2, d_w=2, stddev=0.0099999)
             x = tf.layers.batch_normalization(x, training=is_training)
-            x = apply_bias_act(x, act)
+            x = tf.nn.relu(x)
 
     x = tf.reshape(x, [-1, np.prod(x.shape[1:])])
 
