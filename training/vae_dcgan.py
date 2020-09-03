@@ -235,7 +235,7 @@ def Decoder_synthesis(
 
     with tf.variable_scope('toRGB'):
         z = deconv2d(z, [tf.shape(z)[0], num_channels, resolution,
-                          resolution], stddev=0.0099999, d_h=1, d_w=1, conv_filters_dim=5)
+                         resolution], stddev=0.0099999, d_h=1, d_w=1, conv_filters_dim=5)
         images_out = tf.nn.tanh(z)
 
     return tf.identity(images_out, name='images_out')
