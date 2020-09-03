@@ -151,7 +151,7 @@ def training_loop(
     misc.save_image_grid(grid_fakes, dnnlib.make_run_dir_path('fakes_init.png'), drange=drange_net, grid_size=grid_size)
 
     global_step = tf.Variable(start, trainable=False, name='learning_rate_step')
-    learning_rate = tf.train.exponential_decay(sched_args.learning_rate, global_step, sched_args.decay_step,
+    learning_rate = tf.train.exponential_decay(sched_args.lr, global_step, sched_args.decay_step,
                                                sched_args.decay_rate, staircase=sched_args.stair)
     add_global = global_step.assign_add(1)
     D_opt = tflib.Optimizer(name='TrainD', learning_rate=learning_rate, **D_opt_args)
