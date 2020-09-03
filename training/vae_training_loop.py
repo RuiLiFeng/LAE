@@ -166,6 +166,7 @@ def training_loop(
 
             with tf.name_scope('DataFetch'):
                 reals_read, labels_read = training_set.get_minibatch_tf()
+                print(reals_read)
                 reals_read, labels_read = process_reals(reals_read, labels_read, mirror_augment,
                                                         training_set.dynamic_range, drange_net)
 
