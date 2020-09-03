@@ -254,10 +254,10 @@ def training_loop(
             maintenance_time = dnnlib.RunContext.get().get_last_update_interval() - tick_time
 
             # Save final snapshot.
-        misc.save_pkl((G, D, Gs), dnnlib.make_run_dir_path('network-final.pkl'))
+    misc.save_pkl((G, D, Gs), dnnlib.make_run_dir_path('network-final.pkl'))
 
         # All done.
-        summary_log.close()
-        training_set.close()
+    summary_log.close()
+    training_set.close()
 
 #----------------------------------------------------------------------------
