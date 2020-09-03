@@ -136,13 +136,13 @@ def training_loop(
             G = tflib.Network('G', num_channels=training_set.shape[0], resolution=training_set.shape[1], label_size=training_set.label_size, **G_args)
             D = tflib.Network('D', num_channels=training_set.shape[0], resolution=training_set.shape[1], label_size=training_set.label_size, **D_args)
             Gs = G.clone('Gs')
-            start = int(resume_pkl.split('-')[-1].split('.')[0]) // sched_args.batch_size
+            start = 0
         if resume_pkl is not None:
             print('Loading networks from "%s"...' % resume_pkl)
             rG, rD, rGs = misc.load_pkl(resume_pkl)
             if resume_with_new_nets: G.copy_vars_from(rG); D.copy_vars_from(rD); Gs.copy_vars_from(rGs)
             else: G = rG; D = rD; Gs = rGs
-            start = 0
+            start = int(resume_pkl.split('-')[-1].split('.')[0]) // sched_args.batch_size
 
     # Print layers and generate initial image snapshot.
     G.print_layers(); D.print_layers()
