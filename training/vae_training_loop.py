@@ -177,8 +177,8 @@ def training_loop(
                 G_opt.register_gradients(loss, G_gpu.trainables)
                 D_opt.register_gradients(loss, D_gpu.trainables)
 
-            G_train_op = G_opt.apply_updates()
-            D_train_op = D_opt.apply_updates()
+    G_train_op = G_opt.apply_updates()
+    D_train_op = D_opt.apply_updates()
 
     # Finalize graph.
     with tf.device('/gpu:0'):
