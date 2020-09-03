@@ -221,7 +221,7 @@ def training_loop(
             # Report progress.
             print(
                 'tick %-5d kimg %-8.1f minibatch %-4d time %-12s sec/tick %-7.1f '
-                'sec/kimg %-7.2f maintenance %-6.1f gpumem %.1f loss %-8.1f lr %-6.1f' % (
+                'sec/kimg %-7.2f maintenance %-6.1f gpumem %.1f loss %-8.1f lr %-2.5f' % (
                     autosummary('Progress/tick', cur_tick),
                     autosummary('Progress/kimg', cur_nimg / 1000.0),
                     autosummary('Progress/minibatch', sched_args.batch_size),
